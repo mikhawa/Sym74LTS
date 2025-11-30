@@ -16,7 +16,7 @@ cd Sym74LTS
 symfony serve
 ```
 
-Création d’un contrôleur :
+### Création d’un contrôleur :
 
 ```bash
 php bin/console make:controller
@@ -40,7 +40,7 @@ final class BlogController extends AbstractController
 }
 ```
 
-Installation de PHP CS Fixer
+### Installation de PHP CS Fixer
 
 ```bash
 composer require --dev friendsofphp/php-cs-fixer
@@ -50,4 +50,39 @@ Pour l'appliquer
 
 ```bash
 ./vendor/bin/php-cs-fixer fix
+```
+
+### Utilisation de MariaDB
+
+Dans `config/packages/doctrine.yaml`
+
+```bash
+        identity_generation_preferences:
+            # commentez cette ligne et mettre MariaDBPlatform
+            #Doctrine\DBAL\Platforms\PostgreSQLPlatform: identity
+            Doctrine\DBAL\Platforms\MariaDBPlatform: identity
+```
+
+Création de .env.local :
+
+```bash
+cp .env .env.local
+# puis créer une clef
+php -r 'echo bin2hex(random_bytes(32));'
+```
+
+Dans .env.local :
+
+```bash
+# la clef
+APP_SECRET=d09c63192a0539a36452ae21b489544d870d3767ec98a19744b5050ea0adbe72
+# la base de donnée avec MariaDB en local (modifiez
+# les paramètres de connexion)
+DATABASE_URL="mysql://root:@127.0.0.1:3307/blog_name?serverVersion=11.4.9-MariaDB&charset=utf8mb4"
+```
+
+Vérifiez que votre serveur MariaDB est lancé, puis créez la DB
+
+```bash
+php bin/console doctrine:database:create
 ```

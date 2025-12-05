@@ -86,3 +86,9 @@ Vérifiez que votre serveur MariaDB est lancé, puis créez la DB
 ```bash
 php bin/console doctrine:database:create
 ```
+
+### Création des entités
+
+Pour le schéma voir votre DB ou comme exemple :
+
+[exemple DB](https://github.com/WebDevCF2m2025/symfony-7-2025/blob/main/partie3/db11.md)
